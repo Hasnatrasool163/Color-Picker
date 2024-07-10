@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Color Picker</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+    
+        h1 {
+            color: #007BFF;
+            font-size: 2em;
+            margin-bottom: 10px;
+            animation: colorChange 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes colorChange {
+            0% { color: #007BFF; }
+            100% { color: #0056b3; }
+        }
+
+        .color-picker-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
+        }
+
+        .color-display {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .color-display:hover {
+            transform: scale(1.05);
+        }
+
+        .picker-and-code {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-code {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .color-guide {
+            font-size: 1em;
+            color: hwb(212 5% 13% / 0.623);
+            font-weight: bold;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (min-width: 600px) {
+            .picker-and-code {
+                flex-direction: row;
+            }
+        }
+
+        .palette-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .palette {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: transform 0.2s;
+        }
+
+        .palette:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="color-picker-container">
+        <h1>Simple Color Picker</h1>
+        <div class="color-display" id="colorDisplay"></div>
+        <div class="picker-and-code">
+            <input type="color" id="colorPicker" value="#ff0000">
+            <div class="color-code" id="colorCode">
+                HEX: <span id="hexCode">#ff0000</span><br>
+                RGB: <span id="rgbCode">rgb(255, 0, 0)</span>
+            </div>
+            <button class="copy-button" id="copyHexButton">Copy HEX</button>
+            <button class="copy-button" id="copyRgbButton">Copy RGB</button>
+        </div>
+        <div class="color-guide">
+            <p>Explore the perfect color for your designs with this intuitive color picker. Simplify your visual experience with consistent choices.</p>
+        </div>
+        <div class="palette-container" id="paletteContainer">
+            <div class="palette" style="background-color: #e57373;"></div>
+            <div class="palette" style="background-color: #f06292;"></div>
+            <div class="palette" style="background-color: #ba68c8;"></div>
+            <div class="palette" style="background-color: #9575cd;"></div>
+            <div class="palette" style="background-color: #7986cb;"></div>
+            <div class="palette" style="background-color: #64b5f6;"></div>
+            <div class="palette" style="background-color: #4fc3f7;"></div>
+            <div class="palette" style="background-color: #4dd0e1;"></div>
+            <div class="palette" style="background-color: #4db6ac;"></div>
+            <div class="palette" style="background-color: #81c784;"></div>
+            <div class="palette" style="background-color: #aed581;"></div>
+            <div class="palette" style="background-color: #dce775;"></div>
+            <div class="palette" style="background-color: #fff176;"></div>
+            <div class="palette" style="background-color: #ffd54f;"></div>
+            <div class="palette" style="background-color: #ffb74d;"></div>
+            <div class="palette" style="background-color: #ff8a65;"></div>
+            <div class="palette" style="background-color: #a1887f;"></div>
+            <div class="palette" style="background-color: #e0e0e0;"></div>
+            <div class="palette" style="background-color: #90a4ae;"></div>
+        </div>
+    </div>
+
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const colorDisplay = document.getElementById('colorDisplay');
+        const hexCodeSpan = document.getElementById('hexCode');
+        const rgbCodeSpan = document.getElementById('rgbCode');
+        const copyHexButton = document.getElementById('copyHexButton');
+        const copyRgbButton = document.getElementById('copyRgbButton');
+        const paletteContainer = document.getElementById('paletteContainer');
+
+        colorPicker.addEventListener('input', (event) => {
+            const color = event.target.value;
+            const rgb = hexToRgb(color);
+            updateColorDisplay(color, rgb);
+        });
+
+        paletteContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('palette')) {
+                const color = event.target.style.backgroundColor;
+                const rgb = color.match(/\d+/g);
+                updateColorDisplay(rgbToHex(rgb), rgb);
+            }
+        });
+
+        copyHexButton.addEventListener('click', () => {
+            const hexColor = hexCodeSpan.textContent;
+            navigator.clipboard.writeText(hexColor).then(() => {
+                alert(`Color ${hexColor} copied to clipboard!`);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
+        copyRgbButton.addEventListener('click', () => {
+            const rgbColor = rgbCodeSpan.textContent;
+            navigator.clipboard.writeText(rgbColor).then(() => {
+                alert(`Color ${rgbColor} copied to clipboard!`);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
+        function updateColorDisplay(color, rgb) {
+            colorDisplay.style.backgroundColor = color;
+            hexCodeSpan.textContent = color;
+            rgbCodeSpan.textContent = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+        }
+
+        function hexToRgb(hex) {
+            const bigint = parseInt(hex.slice(1), 16);
+            const r = (bigint >> 16) & 255;
+            const g = (bigint >> 8) & 255;
+            const b = bigint & 255;
+            return [r, g, b];
+        }
+
+        function rgbToHex(rgb) {
+            const r = parseInt(rgb[0]).toString(16).padStart(2, '0');
+            const g = parseInt(rgb[1]).toString(16).padStart(2, '0');
+            const b = parseInt(rgb[2]).toString(16).padStart(2, '0');
+            return `#${r}${g}${b}`;
+        }        
+    </script>
+</body>
+</html>
