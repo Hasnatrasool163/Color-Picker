@@ -135,9 +135,22 @@
         .palette:hover {
             transform: scale(1.1);
         }
+
+        .copy-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <div class="copy-message" id="copyMessage">Color value copied to clipboard!</div>
     <div class="color-picker-container">
         <h1>Color Picker</h1>
         <div class="color-display" id="colorDisplay"></div>
@@ -150,6 +163,7 @@
             </div>
             <button class="copy-button" id="copyHexButton">Copy HEX</button>
             <button class="copy-button" id="copyRgbButton">Copy RGB</button>
+            <button class ="copy-button" onclick="openColorList()">Open Colors List</button>
         </div>
         <div class="color-guide">
             <p>Explore the perfect color for your designs with this intuitive color picker. Simplify your visual experience with consistent choices.</p>
@@ -176,7 +190,7 @@
             <div class="palette" style="background-color: #90a4ae;"></div>
         </div>
     </div>
-
+    
     <script>
         const colorPicker = document.getElementById('colorPicker');
         const colorDisplay = document.getElementById('colorDisplay');
@@ -186,89 +200,126 @@
         const copyHexButton = document.getElementById('copyHexButton');
         const copyRgbButton = document.getElementById('copyRgbButton');
         const paletteContainer = document.getElementById('paletteContainer');
-
+        
         colorPicker.addEventListener('input', (event) => {
             const color = event.target.value;
             const rgb = hexToRgb(color);
             const hsl = rgbToHsl(rgb);
             updateColorDisplay(color, rgb, hsl);
         });
+        
+        function openColorList() {
+            window.open('color-list.html', '_blank');
+        }
+        
+        function selectColorFromList(color) {
+        const colorPicker = document.getElementById('colorPicker');
+        colorPicker.value = color;
+        colorPicker.dispatchEvent(new Event('input')); 
+            window.close(); 
+        }
 
         paletteContainer.addEventListener('click', (event) => {
             if (event.target.classList.contains('palette')) {
                 const color = event.target.style.backgroundColor;
-                const rgb = color.match(/\d+/g);
+                const rgb = color.match(/\d+/g).map(Number);
                 const hex = rgbToHex(rgb);
                 const hsl = rgbToHsl(rgb);
                 updateColorDisplay(hex, rgb, hsl);
             }
         });
-
+        
         copyHexButton.addEventListener('click', () => {
             const hexColor = hexCodeSpan.textContent;
             navigator.clipboard.writeText(hexColor).then(() => {
-                alert(`Color ${hexColor} copied to clipboard!`);
+                showCopyMessage();
             }).catch(err => {
                 console.error('Could not copy text: ', err);
             });
         });
-
+        
         copyRgbButton.addEventListener('click', () => {
             const rgbColor = rgbCodeSpan.textContent;
             navigator.clipboard.writeText(rgbColor).then(() => {
-                alert(`Color ${rgbColor} copied to clipboard!`);
+                showCopyMessage();
             }).catch(err => {
                 console.error('Could not copy text: ', err);
             });
         });
-
+        
+        function showCopyMessage() {
+            const copyMessage = document.getElementById('copyMessage');
+            copyMessage.style.display = 'block';
+            setTimeout(() => {
+                copyMessage.style.display = 'none';
+            }, 2000); 
+        }
+        
         function updateColorDisplay(color, rgb, hsl) {
             colorDisplay.style.backgroundColor = color;
             hexCodeSpan.textContent = color;
             rgbCodeSpan.textContent = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
             hslCodeSpan.textContent = `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
         }
-
+        
         function hexToRgb(hex) {
-            const bigint = parseInt(hex.slice(1), 16);
+            
+            hex = hex.replace('#', '');
+           
+            const bigint = parseInt(hex, 16);
             const r = (bigint >> 16) & 255;
             const g = (bigint >> 8) & 255;
             const b = bigint & 255;
             return [r, g, b];
         }
-
+        
         function rgbToHex(rgb) {
             return `#${((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)}`;
         }
-
+        
         function rgbToHsl(rgb) {
-            let r = rgb[0] / 255;
-            let g = rgb[1] / 255;
-            let b = rgb[2] / 255;
-
-            let max = Math.max(r, g, b);
-            let min = Math.min(r, g, b);
+            const r = rgb[0] / 255;
+            const g = rgb[1] / 255;
+            const b = rgb[2] / 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            
             let h, s, l = (max + min) / 2;
-
+            
             if (max === min) {
-                h = s = 0; // achromatic
+                h = s = 0; 
             } else {
-                let d = max - min;
+                const d = max - min;
                 s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
                 switch (max) {
-                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                    case g: h = (b - r) / d + 2; break;
-                    case b: h = (r - g) / d + 4; break;
+                    case r:
+                        h = (g - b) / d + (g < b ? 6 : 0);
+                        break;
+                    case g:
+                        h = (b - r) / d + 2;
+                        break;
+                    case b:
+                        h = (r - g) / d + 4;
+                        break;
                 }
+
                 h /= 6;
             }
 
-            h = Math.round(h * 360);
-            s = Math.round(s * 100);
-            l = Math.round(l * 100);
-
-            return [h, s, l];
+            return [
+                Math.round(h * 360),
+                Math.round(s * 100),
+                Math.round(l * 100)
+            ];
         }
+
+        
+        const initialColor = colorPicker.value;
+        const initialRgb = hexToRgb(initialColor);
+        const initialHsl = rgbToHsl(initialRgb);
+        updateColorDisplay(initialColor, initialRgb, initialHsl);
     </script>
 </body>
 </html>
