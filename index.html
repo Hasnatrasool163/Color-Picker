@@ -11,9 +11,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh; 
             margin: 0;
             background-color: #f0f0f0;
+            overflow-x: hidden; 
+            overflow-y: auto;   
         }
         
         h1 {
@@ -137,13 +139,14 @@
 </head>
 <body>
     <div class="color-picker-container">
-        <h1>Simple Color Picker</h1>
+        <h1>Color Picker</h1>
         <div class="color-display" id="colorDisplay"></div>
         <div class="picker-and-code">
             <input type="color" id="colorPicker" value="#ff0000">
             <div class="color-code" id="colorCode">
                 HEX: <span id="hexCode">#ff0000</span><br>
-                RGB: <span id="rgbCode">rgb(255, 0, 0)</span>
+                RGB: <span id="rgbCode">rgb(255, 0, 0)</span><br>
+                HSL: <span id="hslCode">hsl(0, 100%, 50%)</span>
             </div>
             <button class="copy-button" id="copyHexButton">Copy HEX</button>
             <button class="copy-button" id="copyRgbButton">Copy RGB</button>
@@ -179,6 +182,7 @@
         const colorDisplay = document.getElementById('colorDisplay');
         const hexCodeSpan = document.getElementById('hexCode');
         const rgbCodeSpan = document.getElementById('rgbCode');
+        const hslCodeSpan = document.getElementById('hslCode');
         const copyHexButton = document.getElementById('copyHexButton');
         const copyRgbButton = document.getElementById('copyRgbButton');
         const paletteContainer = document.getElementById('paletteContainer');
@@ -186,14 +190,17 @@
         colorPicker.addEventListener('input', (event) => {
             const color = event.target.value;
             const rgb = hexToRgb(color);
-            updateColorDisplay(color, rgb);
+            const hsl = rgbToHsl(rgb);
+            updateColorDisplay(color, rgb, hsl);
         });
 
         paletteContainer.addEventListener('click', (event) => {
             if (event.target.classList.contains('palette')) {
                 const color = event.target.style.backgroundColor;
                 const rgb = color.match(/\d+/g);
-                updateColorDisplay(rgbToHex(rgb), rgb);
+                const hex = rgbToHex(rgb);
+                const hsl = rgbToHsl(rgb);
+                updateColorDisplay(hex, rgb, hsl);
             }
         });
 
@@ -215,10 +222,11 @@
             });
         });
 
-        function updateColorDisplay(color, rgb) {
+        function updateColorDisplay(color, rgb, hsl) {
             colorDisplay.style.backgroundColor = color;
             hexCodeSpan.textContent = color;
             rgbCodeSpan.textContent = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            hslCodeSpan.textContent = `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
         }
 
         function hexToRgb(hex) {
@@ -230,11 +238,37 @@
         }
 
         function rgbToHex(rgb) {
-            const r = parseInt(rgb[0]).toString(16).padStart(2, '0');
-            const g = parseInt(rgb[1]).toString(16).padStart(2, '0');
-            const b = parseInt(rgb[2]).toString(16).padStart(2, '0');
-            return `#${r}${g}${b}`;
-        }        
+            return `#${((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)}`;
+        }
+
+        function rgbToHsl(rgb) {
+            let r = rgb[0] / 255;
+            let g = rgb[1] / 255;
+            let b = rgb[2] / 255;
+
+            let max = Math.max(r, g, b);
+            let min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                let d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            h = Math.round(h * 360);
+            s = Math.round(s * 100);
+            l = Math.round(l * 100);
+
+            return [h, s, l];
+        }
     </script>
 </body>
 </html>
