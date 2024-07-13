@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+            padding: 40px;
+        }
+        
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-box {
+            width: 150px;
+            height: 80px;
+            border: 1px solid #ccc;
+            margin-right: 20px;
+        }
+        
+        .color-name {
+            font-size: 1.2em;
+        }
+
+        .save-button {
+            margin-left: 50px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .copy-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Colors List</h1>
+
+    <div class="copy-message" id="copyMessage">Color value copied to clipboard!</div>
+    
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ff0000;"></div>
+        <div class="color-name">#ff0000 (RGB: 255, 0, 0) (HSL: 0, 100%, 50%)</div>
+        <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    
+    <div class="color-item">
+        <div class="color-box" style="background-color: #00ff00;"></div>
+        <div class="color-name">#00ff00 (RGB: 0, 255, 0) (HSL: 120, 100%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #0000ff;"></div>
+        <div class="color-name">#0000ff (RGB: 0, 0, 255) (HSL: 240, 100%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffff00;"></div>
+        <div class="color-name">#ffff00 (RGB: 255, 255, 0) (HSL: 60, 100%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ff00ff;"></div>
+        <div class="color-name">#ff00ff (RGB: 255, 0, 255) (HSL: 300, 100%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #00ffff;"></div>
+        <div class="color-name">#00ffff (RGB: 0, 255, 255) (HSL: 180, 100%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #800000;"></div>
+        <div class="color-name">#800000 (RGB: 128, 0, 0) (HSL: 0, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #008000;"></div>
+        <div class="color-name">#008000 (RGB: 0, 128, 0) (HSL: 120, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #000080;"></div>
+        <div class="color-name">#000080 (RGB: 0, 0, 128) (HSL: 240, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #808000;"></div>
+        <div class="color-name">#808000 (RGB: 128, 128, 0) (HSL: 60, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #800080;"></div>
+        <div class="color-name">#800080 (RGB: 128, 0, 128) (HSL: 300, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #008080;"></div>
+        <div class="color-name">#008080 (RGB: 0, 128, 128) (HSL: 180, 100%, 25%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #c0c0c0;"></div>
+        <div class="color-name">#c0c0c0 (RGB: 192, 192, 192) (HSL: 0, 0%, 75%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #808080;"></div>
+        <div class="color-name">#808080 (RGB: 128, 128, 128) (HSL: 0, 0%, 50%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #999999;"></div>
+        <div class="color-name">#999999 (RGB: 153, 153, 153) (HSL: 0, 0%, 60%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #66ff66;"></div>
+        <div class="color-name">#66ff66 (RGB: 102, 255, 102) (HSL: 120, 100%, 75%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffcc66;"></div>
+        <div class="color-name">#ffcc66 (RGB: 255, 204, 102) (HSL: 37, 100%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #99ccff;"></div>
+        <div class="color-name">#99ccff (RGB: 153, 204, 255) (HSL: 210, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #cc99ff;"></div>
+        <div class="color-name">#cc99ff (RGB: 204, 153, 255) (HSL: 270, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ff99cc;"></div>
+        <div class="color-name">#ff99cc (RGB: 255, 153, 204) (HSL: 330, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ccff99;"></div>
+        <div class="color-name">#ccff99 (RGB: 204, 255, 153) (HSL: 90, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #99ffcc;"></div>
+        <div class="color-name">#99ffcc (RGB: 153, 255, 204) (HSL: 150, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffff99;"></div>
+        <div class="color-name">#ffff99 (RGB: 255, 255, 153) (HSL: 60, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ccffff;"></div>
+        <div class="color-name">#ccffff (RGB: 204, 255, 255) (HSL: 180, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffccff;"></div>
+        <div class="color-name">#ffccff (RGB: 255, 204, 255) (HSL: 300, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ccccff;"></div>
+        <div class="color-name">#ccccff (RGB: 204, 204, 255) (HSL: 240, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffcccc;"></div>
+        <div class="color-name">#ffcccc (RGB: 255, 204, 204) (HSL: 0, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ccffcc;"></div>
+        <div class="color-name">#ccffcc (RGB: 204, 255, 204) (HSL: 120, 100%, 80%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #ffcc99;"></div>
+        <div class="color-name">#ffcc99 (RGB: 255, 204, 153) (HSL: 30, 100%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #cc99cc;"></div>
+        <div class="color-name">#cc99cc (RGB: 204, 153, 204) (HSL: 300, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #99cc99;"></div>
+        <div class="color-name">#99cc99 (RGB: 153, 204, 153) (HSL: 120, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #9999cc;"></div>
+        <div class="color-name">#9999cc (RGB: 153, 153, 204) (HSL: 240, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #cc9999;"></div>
+        <div class="color-name">#cc9999 (RGB: 204, 153, 153) (HSL: 0, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #99cccc;"></div>
+        <div class="color-name">#99cccc (RGB: 153, 204, 204) (HSL: 180, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+        <div class="color-box" style="background-color: #cc99ff;"></div>
+        <div class="color-name">#cc99ff (RGB: 204, 153, 255) (HSL: 270, 25%, 70%)</div>
+         <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+    </div>
+    <div class="color-item">
+    <div class="color-box" style="background-color: #ff6666;"></div>
+    <div class="color-name">#ff6666 (RGB: 255, 102, 102) (HSL: 0, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66ff99;"></div>
+    <div class="color-name">#66ff99 (RGB: 102, 255, 153) (HSL: 140, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #6699ff;"></div>
+    <div class="color-name">#6699ff (RGB: 102, 153, 255) (HSL: 220, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #ff66cc;"></div>
+    <div class="color-name">#ff66cc (RGB: 255, 102, 204) (HSL: 320, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #cc66ff;"></div>
+    <div class="color-name">#cc66ff (RGB: 204, 102, 255) (HSL: 280, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66ffff;"></div>
+    <div class="color-name">#66ffff (RGB: 102, 255, 255) (HSL: 180, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #ff9966;"></div>
+    <div class="color-name">#ff9966 (RGB: 255, 153, 102) (HSL: 30, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66cc66;"></div>
+    <div class="color-name">#66cc66 (RGB: 102, 204, 102) (HSL: 120, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #cc6666;"></div>
+    <div class="color-name">#cc6666 (RGB: 204, 102, 102) (HSL: 0, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66cc99;"></div>
+    <div class="color-name">#66cc99 (RGB: 102, 204, 153) (HSL: 140, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #669966;"></div>
+    <div class="color-name">#669966 (RGB: 102, 153, 102) (HSL: 120, 20%, 50%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #996699;"></div>
+    <div class="color-name">#996699 (RGB: 153, 102, 153) (HSL: 300, 20%, 50%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #669999;"></div>
+    <div class="color-name">#669999 (RGB: 102, 153, 153) (HSL: 180, 20%, 50%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #999966;"></div>
+    <div class="color-name">#999966 (RGB: 153, 153, 102) (HSL: 60, 20%, 50%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #996666;"></div>
+    <div class="color-name">#996666 (RGB: 153, 102, 102) (HSL: 0, 20%, 50%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66ccff;"></div>
+    <div class="color-name">#66ccff (RGB: 102, 204, 255) (HSL: 210, 100%, 70%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #cc66cc;"></div>
+    <div class="color-name">#cc66cc (RGB: 204, 102, 204) (HSL: 300, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #66cccc;"></div>
+    <div class="color-name">#66cccc (RGB: 102, 204, 204) (HSL: 180, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+<div class="color-item">
+    <div class="color-box" style="background-color: #cc6699;"></div>
+    <div class="color-name">#cc6699 (RGB: 204, 102, 153) (HSL: 330, 50%, 60%)</div>
+     <button class="save-button" onclick="copyToClipboard('#ff0000')">Copy</button>
+</div>
+
+<script>
+        function copyToClipboard(color) {
+            const el = document.createElement('textarea');
+            el.value = color;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            const copyMessage = document.getElementById('copyMessage');
+            copyMessage.style.display = 'block';
+            setTimeout(() => {
+                copyMessage.style.display = 'none';
+            }, 2000); 
+        }
+    </script>
+</body>
+</html>
